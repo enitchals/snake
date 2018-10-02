@@ -6,6 +6,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="App--Title">SNEK</div>
+        <div>The arcade classic!</div>
+        <div>Press SPACE to start</div>
+        <br/>
         <Snake/>
       </div>
     );

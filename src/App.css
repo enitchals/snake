@@ -4,6 +4,11 @@
   align-items: center;
 }
 
+.App--Title{
+  font-weight: bold;
+  font-size: 2em;
+}
+
 .Snake {
   display: flex;
   flex-direction: row;
