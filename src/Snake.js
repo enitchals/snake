@@ -97,7 +97,6 @@ class Snake extends Component {
         matrix[headY][headX] = 1;
         positions.unshift([headY, headX]);
         this.setState({headX, headY, tailX, tailY, matrix, positions});
-        console.log(positions); 
     }
 
     updateBody() {
