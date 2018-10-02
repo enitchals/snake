@@ -8,7 +8,7 @@ class App extends Component {
     this.state = {
       score: 0,
       highscore: 0,
-      difficulty: "easy",
+      wrap: true,
       speed: "normal",
     }
   }
@@ -19,7 +19,8 @@ class App extends Component {
         <div>The arcade classic!</div>
         <div>Press SPACE to start</div>
         <br/>
-        <Snake/>
+
+        <Snake wrap={this.state.wrap}/>
       </div>
     );
   }

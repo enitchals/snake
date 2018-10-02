@@ -4,8 +4,8 @@ import Cell from './Cell.js';
 import './App.css';
 
 class Snake extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             gridSize: start[0].length-1,
             go: false,
@@ -62,22 +62,30 @@ class Snake extends Component {
         switch(this.state.direction){
             case 'down':
                 headY++;
-                if (headY > this.state.gridSize) headY = 0; 
+                if (headY > this.state.gridSize){
+                    if (this.props.wrap) {headY = 0} else {this.gameOver()}
+                }
                 if (matrix[headY][headX] == 1) this.gameOver();
                 break;
             case 'up':
                 headY--;
-                if (headY < 0) headY = this.state.gridSize;
+                if (headY < 0){
+                    if (this.props.wrap) {headY = this.state.gridSize} else {this.gameOver()}
+                }
                 if (matrix[headY][headX] == 1) this.gameOver();
                 break;
             case 'right':
                 headX++;
-                if (headX > this.state.gridSize) headX = 0;
+                if (headX > this.state.gridSize){
+                    if (this.props.wrap) {headX = 0} else {this.gameOver()}
+                }
                 if (matrix[headY][headX] == 1) this.gameOver();
                 break;
             case 'left':
                 headX--;
-                if (headX < 0) headX = this.state.gridSize;
+                if (headX < 0){
+                    if (this.props.wrap) {headX = this.state.gridSize} else {this.gameOver()}
+                }
                 if (matrix[headY][headX] == 1) this.gameOver();
                 break;
         }
