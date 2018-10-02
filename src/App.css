@@ -27,7 +27,8 @@
 }
 
 .AppleCell{
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background: red;
+  border: 1px solid black;
 }

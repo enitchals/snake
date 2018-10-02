@@ -9,24 +9,26 @@ class Snake extends Component {
         this.state = {
             gridSize: start[0].length-1,
             go: false,
+            ate: false,
             matrix: start,
             direction: "down",
             headY: 1,
             headX: 9,
-            tailY: 0,
-            tailX: 9,
+            positions: [[1,9], [0,9]],
             timer: null,
         }
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.move = this.move.bind(this);
+        this.placeApple = this.placeApple.bind(this);
     }
     componentDidMount() {
+        this.placeApple();
         window.addEventListener('keydown', this.handleKeyPress)
     }
 
     go(){
         this.setState({go: true});
-        this.setState({timer: setInterval(() => this.move(), 500)});
+        this.setState({timer: setInterval(() => this.move(), 200)});
     }
 
     gameOver(){
@@ -34,16 +36,25 @@ class Snake extends Component {
         window.alert("Game Over!");
     }
 
+    placeApple() {
+        let randX;
+        let randY;
+        let matrix = this.state.matrix;
+        const randomize = () => {
+            randX = Math.round(Math.random()*this.state.gridSize);
+            randY = Math.round(Math.random()*this.state.gridSize);
+        }
+        randomize();
+        if (matrix[randY][randX] == 0) {matrix[randY][randX] = 2} else randomize();
+        this.setState({matrix});
+    }
+
     move(){
         let headX = this.state.headX;
         let headY = this.state.headY;
-        let tailX = this.state.tailX;
-        let tailY = this.state.tailY;
-
+        let positions = this.state.positions;
         let matrix = this.state.matrix;
-
-        //remove previous tail
-        matrix[tailY][tailX] = 0;
+        let ate = false;
 
         //change values for head
         switch(this.state.direction){
@@ -68,10 +79,25 @@ class Snake extends Component {
                 if (matrix[headY][headX] == 1) this.gameOver();
                 break;
         }
-        
+
+        //check if snake has eaten
+        if (matrix[headY][headX] == 2) {
+            ate = true;
+            this.placeApple();
+        }
+        //remove previous tail
+        let tailY = positions[positions.length-1][0];
+        let tailX = positions[positions.length-1][1];
+        if (!ate){
+            matrix[tailY][tailX] = 0;
+            positions.pop();
+        }
+                
         //add new head
         matrix[headY][headX] = 1;
-        this.setState({headX, headY, tailX, tailY, matrix})
+        positions.unshift([headY, headX]);
+        this.setState({headX, headY, tailX, tailY, matrix, positions});
+        console.log(positions); 
     }
 
     updateBody() {
