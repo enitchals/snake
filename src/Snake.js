@@ -45,8 +45,10 @@ class Snake extends Component {
             randY = Math.round(Math.random()*this.state.gridSize);
         }
         randomize();
-        if (matrix[randY][randX] == 0) {matrix[randY][randX] = 2} else randomize();
-        this.setState({matrix});
+        if (matrix[randY][randX] == 0) {
+            matrix[randY][randX] = 2;
+            this.setState({matrix});
+        } else this.placeApple();
     }
 
     move(){

@@ -3,6 +3,15 @@ import Snake from './Snake.js';
 import './App.css';
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      score: 0,
+      highscore: 0,
+      difficulty: "easy",
+      speed: "normal",
+    }
+  }
   render() {
     return (
       <div className="App">
