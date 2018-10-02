@@ -24,14 +24,14 @@ class Snake extends Component {
         window.addEventListener('keydown', this.handleKeyPress)
     }
 
-    go(timer){
+    go(){
         this.setState({go: true});
         this.setState({timer: setInterval(() => this.move(), 500)});
     }
 
     gameOver(){
-        clearInterval(this.state.timer)
-        window.alert("Game Over!")
+        clearInterval(this.state.timer);
+        window.alert("Game Over!");
     }
 
     move(){
@@ -45,26 +45,30 @@ class Snake extends Component {
         //remove previous tail
         matrix[tailY][tailX] = 0;
 
-        //change values for head and tail
+        //change values for head
         switch(this.state.direction){
             case 'down':
-                console.log(this.state.gridSize);
                 headY++;
+                if (headY > this.state.gridSize) headY = 0; 
                 if (matrix[headY][headX] == 1) this.gameOver();
                 break;
             case 'up':
                 headY--;
+                if (headY < 0) headY = this.state.gridSize;
                 if (matrix[headY][headX] == 1) this.gameOver();
                 break;
             case 'right':
                 headX++;
+                if (headX > this.state.gridSize) headX = 0;
                 if (matrix[headY][headX] == 1) this.gameOver();
                 break;
             case 'left':
                 headX--;
+                if (headX < 0) headX = this.state.gridSize;
                 if (matrix[headY][headX] == 1) this.gameOver();
                 break;
         }
+        
         //add new head
         matrix[headY][headX] = 1;
         this.setState({headX, headY, tailX, tailY, matrix})
@@ -82,13 +86,25 @@ class Snake extends Component {
             case 40:
                 direction = 'down';
                 break;
+            case 83:
+                direction = 'down';
+                break;
             case 38:
+                direction = 'up';
+                break;
+            case 87:
                 direction = 'up';
                 break;
             case 39:
                 direction = 'right';
                 break;
+            case 68:
+                direction = 'right';
+                break;
             case 37:
+                direction = 'left';
+                break;
+            case 65:
                 direction = 'left';
                 break;
         }
