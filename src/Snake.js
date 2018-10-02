@@ -119,28 +119,28 @@ class Snake extends Component {
                 this.go(this.state.timer);
                 break;
             case 40:
-                direction = 'down';
+                if (direction != 'up') direction = 'down';
                 break;
             case 83:
-                direction = 'down';
+                if (direction != 'up') direction = 'down';
                 break;
             case 38:
-                direction = 'up';
+                if (direction != 'down') direction = 'up';
                 break;
             case 87:
-                direction = 'up';
+                if (direction != 'down') direction = 'up';
                 break;
             case 39:
-                direction = 'right';
+                if (direction != 'left') direction = 'right';
                 break;
             case 68:
-                direction = 'right';
+                if (direction != 'left') direction = 'right';
                 break;
             case 37:
-                direction = 'left';
+                if (direction != 'right') direction = 'left';
                 break;
             case 65:
-                direction = 'left';
+                if (direction != 'right') direction = 'left';
                 break;
         }
         this.setState({direction});
