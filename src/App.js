@@ -12,15 +12,23 @@ class App extends Component {
       speed: "normal",
     }
   }
+
+  addPoints = (points) => {
+    let score = this.state.score;
+    score += points;
+    this.setState({score})
+  }
+
   render() {
     return (
       <div className="App">
         <div className="App--Title">SNEK</div>
         <div>The arcade classic!</div>
         <div>Press SPACE to start</div>
+        <div>SCORE: {this.state.score}</div>
         <br/>
 
-        <Snake wrap={this.state.wrap}/>
+        <Snake wrap={this.state.wrap} score={this.state.score} addPoints={this.addPoints}/>
       </div>
     );
   }

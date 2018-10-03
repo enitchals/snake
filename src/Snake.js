@@ -33,7 +33,7 @@ class Snake extends Component {
 
     gameOver(){
         clearInterval(this.state.timer);
-        window.alert("Game Over!");
+        window.alert(`Game Over! \n SCORE: ${this.props.score}`);
     }
 
     placeApple() {
@@ -93,6 +93,7 @@ class Snake extends Component {
         //check if snake has eaten
         if (matrix[headY][headX] == 2) {
             ate = true;
+            this.props.addPoints(10+this.state.positions.length);
             this.placeApple();
         }
         //remove previous tail
@@ -107,9 +108,6 @@ class Snake extends Component {
         matrix[headY][headX] = 1;
         positions.unshift([headY, headX]);
         this.setState({headX, headY, tailX, tailY, matrix, positions});
-    }
-
-    updateBody() {
     }
 
     handleKeyPress = (e) => {
