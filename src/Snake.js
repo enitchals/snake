@@ -28,7 +28,7 @@ class Snake extends Component {
 
     go(){
         this.setState({go: true});
-        this.setState({timer: setInterval(() => this.move(), 200)});
+        this.setState({timer: setInterval(() => this.move(), this.props.speed)});
     }
 
     gameOver(){
@@ -93,7 +93,7 @@ class Snake extends Component {
         //check if snake has eaten
         if (matrix[headY][headX] == 2) {
             ate = true;
-            this.props.addPoints(10+this.state.positions.length);
+            this.props.addPoints(5+parseInt(this.state.positions.length/5));
             this.placeApple();
         }
         //remove previous tail
@@ -114,7 +114,7 @@ class Snake extends Component {
         let direction = this.state.direction;
         switch(e.keyCode){
             case 32:
-                this.go(this.state.timer);
+                if (!this.state.go) this.go(this.state.timer);
                 break;
             case 40:
                 if (direction != 'up') direction = 'down';

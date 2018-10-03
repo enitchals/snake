@@ -9,7 +9,7 @@ class App extends Component {
       score: 0,
       highscore: 0,
       wrap: true,
-      speed: "normal",
+      speed: 200,
     }
   }
 
@@ -28,7 +28,7 @@ class App extends Component {
         <div>SCORE: {this.state.score}</div>
         <br/>
 
-        <Snake wrap={this.state.wrap} score={this.state.score} addPoints={this.addPoints}/>
+        <Snake wrap={this.state.wrap} score={this.state.score} addPoints={this.addPoints} speed={this.state.speed}/>
       </div>
     );
   }
