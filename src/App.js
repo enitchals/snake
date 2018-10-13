@@ -22,10 +22,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App--Title">SNEK</div>
+        <div className="App--Title">SNAKE</div>
         <div>The arcade classic!</div>
         <div>Press SPACE to start</div>
         <div>SCORE: {this.state.score}</div>
+        
         <br/>
 
         <Snake wrap={this.state.wrap} score={this.state.score} addPoints={this.addPoints} speed={this.state.speed}/>
