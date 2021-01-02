@@ -1,3 +1,23 @@
+export const startingPositions = (gridSize) => {
+    const startingPoint = Math.round(gridSize/2);
+    return [[1,startingPoint], [0,startingPoint]];
+}
+
+export const createMatrix = (gridSize) => {
+    // const matrix = Array(gridSize).fill(Array(gridSize).fill(0));
+    const matrix = [];
+    for (let i = 0; i<gridSize; i++) {
+        matrix.push(Array(gridSize).fill(0));
+    }
+    console.log("welcome to the matrix: ", matrix)
+    // return matrix;
+    const positions = startingPositions(gridSize);
+    positions.forEach(position => {
+        matrix[position[0]][position[1]] = 1
+    })
+    return matrix;
+}
+
 export const start = [
     [0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],

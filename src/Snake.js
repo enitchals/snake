@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {start} from './start.js';
+import {createMatrix, startingPositions, start} from './start.js';
 import Cell from './Cell.js';
 import './App.css';
 
@@ -7,7 +7,6 @@ class Snake extends Component {
     constructor(props){
         super(props);
         this.state = {
-            gridSize: start[0].length-1,
             go: false,
             ate: false,
             matrix: start,
@@ -21,9 +20,21 @@ class Snake extends Component {
         this.move = this.move.bind(this);
         this.placeApple = this.placeApple.bind(this);
     }
+
     componentDidMount() {
+        // this.drawGrid();
+        // this.setState({matrix: start})
         this.placeApple();
-        window.addEventListener('keydown', this.handleKeyPress)
+        window.addEventListener('keydown', this.handleKeyPress);
+    }
+
+    componentDidUpdate() {
+        if (this.state.matrix.length !== this.props.gridSize) { this.drawGrid() }
+    }
+
+    drawGrid() {
+        this.setState({matrix: createMatrix(this.props.gridSize || 20)});
+        this.setState({positions: startingPositions(this.props.gridSize || 20)});
     }
 
     go(){
@@ -37,14 +48,14 @@ class Snake extends Component {
     }
 
     placeApple() {
-        let randX;
-        let randY;
         let matrix = this.state.matrix;
-        const randomize = () => {
-            randX = Math.round(Math.random()*this.state.gridSize);
-            randY = Math.round(Math.random()*this.state.gridSize);
-        }
-        randomize();
+        if (matrix == [] || !matrix) return;
+        console.log("matrix: ", matrix)
+        const randX = Math.round(Math.random()*this.props.gridSize);
+        const randY = Math.round(Math.random()*this.props.gridSize);
+        console.log("randX: ", randX)
+        console.log("randY: ", randY)
+        if (!matrix[randY]) return;
         if (matrix[randY][randX] == 0) {
             matrix[randY][randX] = 2;
             this.setState({matrix});
@@ -62,7 +73,7 @@ class Snake extends Component {
         switch(this.state.direction){
             case 'down':
                 headY++;
-                if (headY > this.state.gridSize){
+                if (headY > this.props.gridSize){
                     if (this.props.wrap) {headY = 0} else {this.gameOver()}
                 }
                 if (matrix[headY][headX] == 1) this.gameOver();
@@ -70,13 +81,13 @@ class Snake extends Component {
             case 'up':
                 headY--;
                 if (headY < 0){
-                    if (this.props.wrap) {headY = this.state.gridSize} else {this.gameOver()}
+                    if (this.props.wrap) {headY = this.props.gridSize} else {this.gameOver()}
                 }
                 if (matrix[headY][headX] == 1) this.gameOver();
                 break;
             case 'right':
                 headX++;
-                if (headX > this.state.gridSize){
+                if (headX > this.props.gridSize){
                     if (this.props.wrap) {headX = 0} else {this.gameOver()}
                 }
                 if (matrix[headY][headX] == 1) this.gameOver();
@@ -84,7 +95,7 @@ class Snake extends Component {
             case 'left':
                 headX--;
                 if (headX < 0){
-                    if (this.props.wrap) {headX = this.state.gridSize} else {this.gameOver()}
+                    if (this.props.wrap) {headX = this.props.gridSize} else {this.gameOver()}
                 }
                 if (matrix[headY][headX] == 1) this.gameOver();
                 break;

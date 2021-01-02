@@ -1,38 +1,143 @@
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: darkred;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px darkred;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+
+
+
 .App{
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: white;
 }
 
-.App--Title{
+.Header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px;
+}
+
+.Header--Section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.App--Title {
   font-weight: bold;
-  font-size: 2em;
+  font-size: 30px;
+  color: darkred;
+  text-shadow: red 0px 0px 4px;
+}
+
+.App-Score {
+  font-weight: bold;
+  font-size: 25px;
+  color: darkred;
+  text-shadow: red 0px 0px 4px;
+}
+
+.Header--Label {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.Header--Control-Text {
+  font-size: 25px;
+  color: darkred;
+  text-shadow: red 0px 0px 2px;
 }
 
 .Snake {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 400px;
-  height: 400px;
+  width: 600px;
+  height: 600px;
   border: 2px solid black;
 }
 
 .EmptyCell{
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   background: white;
 }
 
 .SnakeCell{
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   background: black;
 }
 
 .AppleCell{
-  width: 18px;
-  height: 18px;
+  width: 28px;
+  height: 28px;
   background: red;
   border: 1px solid black;
+  border-radius: 14px;
 }
