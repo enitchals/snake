@@ -91,26 +91,20 @@ input:checked + .slider:before {
 .App--Title {
   font-weight: bold;
   font-size: 30px;
-  color: darkred;
-  text-shadow: red 0px 0px 4px;
+  color: teal;
+  text-shadow: lightseagreen 0px 0px 4px;
 }
 
 .App-Score {
   font-weight: bold;
   font-size: 25px;
-  color: darkred;
-  text-shadow: red 0px 0px 4px;
+  color: teal;
+  text-shadow: lightseagreen 0px 0px 4px;
 }
 
 .Header--Label {
   font-weight: bold;
   font-size: 20px;
-}
-
-.Header--Control-Text {
-  font-size: 25px;
-  color: darkred;
-  text-shadow: red 0px 0px 2px;
 }
 
 .Snake {
